@@ -1,0 +1,485 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+/*解决头像模糊问题*/
+
+img {
+    image-rendering: -moz-crisp-edges;
+    /* Firefox */
+    image-rendering: -o-crisp-edges;
+    /* Opera */
+    image-rendering: -webkit-optimize-contrast;
+    /*!*Webkit (non-standard naming) *!*/
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    /* IE (non-standard property) */
+}
+
+/*聊天框样式*/
+#self_message .content,
+#received_message .content {
+    position: relative;
+    max-width: 40%;
+    min-height: 30px;
+    border-radius: 5px;
+    word-break: break-word;
+    padding: 5px;
+    line-height: 20px;
+    display: block;
+}
+
+#received_message .content {
+    background: white;
+    color: black;
+    margin-left: 10px;
+}
+
+#self_message .content {
+    background: rgb(41, 134, 241);
+    color: white;
+    margin-right: 10px;
+}
+
+#self_message .content::after,
+#received_message .content::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    top: 15px;
+}
+
+#received_message .content::after {
+    left: -14px;
+    border-right-color: white;
+}
+
+#self_message .content::after {
+    border-left-color: rgb(41, 134, 241);
+    right: -14px;
+}
+
+#self_message img,
+#received_message img {
+    margin-top: 2%;
+}
+
+#self_message .username,
+#received_message .username {
+    text-align: start;
+    font-size: small;
+    color: grey;
+    padding: 5px;
+}
+
+#received_message .username {
+    margin-left: 5px;
+}
+
+#self_message .username {
+    margin-right: 5px;
+}
+
+/*系统消息样式*/
+
+#system_message p {
+    margin: 5px;
+    font-size: small;
+    color: grey;
+}
+/* 时间消息的样式 */
+
+#time_message p {
+    margin: 0px;
+    font-size: small;
+    color: grey;
+}
+
+
+
+/*容器样式*/
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+.jumbotron {
+    background: url("/img/4.jpg");
+    margin: 0;
+    background-size: cover;
+}
+
+.jumbotron .container>.row {
+    height: 90vh;
+    border-radius: 10px;
+}
+
+.container {
+    width: 100%;
+    padding: 0;
+}
+
+.chatroom {
+    border-radius: 50px;
+}
+
+.option-list {
+    width: 60px;
+    height: 90vh;
+    background: #1b1a1a;
+    text-align: center;
+    padding: 11px;
+    position: relative;
+}
+
+.option-list .avatar {
+    height: 4vh;
+}
+
+.option-list .avatar img {
+    border-radius: 5px;
+}
+
+.option-list .chat-option {
+    height: 5vh;
+}
+
+.option-list .contact-option {
+    height: 5vh;
+}
+
+.option-list .footer {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.option-list .chat-option i,
+.option-list .contact-option i,
+.option-list .setting-option i {
+    cursor: pointer;
+    width: 40px;
+    margin-top: 20px;
+    font-size: 23px;
+    text-align: center;
+    color: rgb(41, 134, 241);
+    /* text-shadow: 10px 10px 10px black; */
+}
+
+.chat-list {
+    height: 90vh;
+    background: rgb(219, 215, 215);
+    padding: 15px 5px 15px 5px;
+}
+
+.chat-list .search-bar {
+    height: 5vh;
+    position: relative;
+    padding-left: 10px;
+}
+
+.chat-list .search-bar input {
+    width: 200px;
+    border: none;
+    border-radius: 20px;
+    padding: 0 0 0 37px;
+    height: 30px;
+    transition: all 0.5s ease 0s;
+    margin: 0 0 25px 0;
+    background: #c2bfbf;
+    box-shadow: none;
+    outline: 0 none;
+    font-weight: normal;
+}
+
+.chat-list .search-bar i {
+    position: absolute;
+    transition: all 0.5s ease 0s;
+    top: 8px;
+    left: 20px;
+    font-size: 17px;
+    color: #a3a2a2;
+}
+
+.btn-add-friend {
+    border: none;
+    background: #c2bfbf;
+    margin-left: 20px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.btn-add-friend:focus {
+    /*消除按钮焦点效果：移除点击后的边框*/
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.btn-add-friend:active {
+    opacity: 0.7;
+}
+
+.btn-add-friend:hover {
+    opacity: 0.7;
+}
+
+.btn-add-friend i {
+    /*通过此方法可以让图标看起来更细*/
+    -webkit-text-stroke: 1px #c2bfbf;
+    color: rgb(70, 69, 69);
+    font-size: 1em
+}
+
+.chat-list .search-bar input:focus+i {
+    color: rgb(54, 54, 54);
+}
+
+.chat-list .contact-list {
+    height: 80vh;
+    padding: 0;
+}
+
+.chat-list .contact-list .list-group-item {
+    height: 70px;
+    padding: 10px 7px 10px 7px;
+}
+
+.active {
+    background: rgb(41, 134, 241);
+}
+
+.chat-list .contact-list .list-group-item>.row {
+    height: 100%;
+}
+
+.chat-list .contact-list .list-group-item .contact-img {
+    padding: 0;
+}
+
+.chat-list .contact-list .list-group-item .contact-title {
+    font-weight: bold;
+    overflow: hidden;
+    max-width: 110px;
+    /* 溢出用省略号显示 */
+    text-overflow: ellipsis;
+    /* 溢出不换行 */
+    white-space: nowrap;
+}
+
+.chat-list .contact-list .list-group-item .recent-message {
+    font-size: 14px;
+    overflow: hidden;
+    max-width: 170px;
+    /* 溢出用省略号显示 */
+    text-overflow: ellipsis;
+    /* 溢出不换行 */
+    white-space: nowrap;
+}
+/*聊天窗口*/
+
+.chat-frame {
+    background: rgb(221, 220, 220);
+    padding: 0;
+}
+
+.chat-frame .chatroom-title {
+    background: rgb(230, 227, 227);
+}
+
+.chat-frame .chatroom-title .title-content {
+    font-size: 30px;
+    padding-left: 18%;
+    text-align: center;
+    line-height: 93px;
+    height: 10vh;
+}
+
+.chat-frame .chatroom-title i,
+.chat-frame .chatroom-title .title-content {
+    text-align: center;
+    line-height: 93px;
+}
+
+.chat-frame .chatroom-title i {
+    color: rgb(61, 60, 60);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.chat-frame .chatroom-title i:hover {
+    opacity: 0.7;
+}
+
+.chat-frame .chat-detail {
+    width: 0%;
+    position: fixed;
+    top: 18%;
+    right: 0px;
+    background: whitesmoke;
+    word-break: break-all;
+    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+    border-radius: 5px;
+    height: 27%;
+    z-index: 9988;
+}
+
+.chat-frame .chat-detail .user-detail {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    border-radius: 10px;
+    margin: 0;
+    background: whitesmoke;
+    flex-direction: row;
+}
+
+
+.chat-frame .chat-detail .user-detail li {
+    width: 0px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    list-style: none;
+    height: 80px;
+    float: left;
+    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+}
+
+.chat-frame .chat-detail .user-detail p {
+    font-size: 14px;
+    overflow: hidden;
+    max-width: 100px;
+    /* 溢出用省略号显示 */
+    text-overflow: ellipsis;
+    /* 溢出不换行 */
+    white-space: nowrap;
+}
+
+.chat-frame .chat-detail .user-detail:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.chat-frame .chat-detail .user-detail li img {
+    border-radius: 50%;
+}
+
+.chat-frame .chat-content {
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 60vh;
+}
+
+.chat-frame .chat-content .chat li {
+    padding-top: 5px;
+}
+
+.chat-frame .chat-content .chat img {
+    border-radius: 50%;
+}
+
+.chat-frame .input-frame {
+    padding: 0;
+    height: 20vh;
+}
+
+.chat-frame .input-frame .function-list {
+    background-color: white;
+    height: 20%;
+}
+
+.chat-frame .input-frame .function-list i {
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-frame .input-frame .function-list i:hover {
+    opacity: 0.7;
+}
+
+.chat-frame .input-frame textarea {
+    padding: 5px 10px 5px 10px;
+    border: none;
+    width: 100%;
+    height: 80%;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.chat-frame .input-frame textarea:focus {
+    border: none;
+    outline: none;
+}
+
+.friend-list {
+    padding: 0px 0px 10px 0px;
+    overflow: auto;
+    height: 500px;
+}
+
+.friend-list .list-group-item {
+    height: 70px;
+    padding: 10px;
+}
+
+.friend-list .list-group-item img {
+    border-radius: 50%;
+}
+
+.friend-list .list-group-item p {
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.friend-list .list-group-item .btn-add-friend {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    height: 40px;
+    width: 40px;
+}
+.a-upload {
+    padding: 4px 10px;
+    /*height: 34px;*/
+    line-height: 28px;
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+    background-color: #3376b1;
+    border-color: #2a6ba3;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.a-upload input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+
+.a-upload:hover {
+    color: #FFFFFF;
+    background: #3885c9;
+    border-color: #286192;
+    text-decoration: none;
+}
+.img-form {
+    width: 100%;
+    padding-top: 7px;
+}
