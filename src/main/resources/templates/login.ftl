@@ -54,28 +54,32 @@
   function login() {
     let username = $("#username").val();
     let password = $("#password").val();
+
+    let data = {
+      username : username,
+      password : password
+    }
+
     $.ajax({
       type: "POST",
-      // dataType:"json",//服务器返回数据类型,不写就自动选择
-      url: "/login",
-      data: "username=" + username + "&password=" + password,
+      dataType: "json",//服务器返回数据类型,不写就自动选择
+      contentType: "application/json; charset=utf-8",
+      url: "/login2",
+      data: JSON.stringify(data),
       success: function (result) {
-        if (result != null) {
-          console.log(JSON.stringify(result));
-          if (result['result'] === true) {
-            window.location.href = "/chatroom";
-          } else {
-            alert("登入失败");
-            $("#username").val("");
-            $("#password").val("");
-            $(".result").css("display", "block");
-          }
+        console.log(result);
+        let temp =result.data;
 
+        if (result != null)
+          alert(result["msg"]);
+        if(result["code"] === 20018) {
+         // setCookie("token",result.data.token);
+          window.location.href = "/chatroom";
         }
       },
-      error: function () {
-        alert("异常");
-        window.location.href = "/login";
+      error: function (result) {
+        alert(result["msg"]);
+        //window.location.href = "/register";
       }
     })
   }

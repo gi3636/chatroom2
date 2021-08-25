@@ -3,8 +3,11 @@ package com.example.chatroom2.controller;
 import com.example.chatroom2.common.GlobalException.GlobalException;
 import com.example.chatroom2.common.ResultCode.ResultCode;
 import com.example.chatroom2.common.ResultVo;
+import com.example.chatroom2.entity.User;
 import com.example.chatroom2.model.form.LoginForm;
 import com.example.chatroom2.service.UserService;
+import com.example.chatroom2.util.JwtInfo;
+import com.example.chatroom2.util.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.xml.transform.Result;
 
@@ -41,9 +45,11 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login")
+    @ResponseBody
     @ApiOperation("登入检查")
     public ResultVo loginCheck(@RequestBody LoginForm loginForm){
+        System.out.println(loginForm);
         String username =  loginForm.getUsername().trim();
         String password =  loginForm.getPassword().trim();
 
@@ -52,14 +58,42 @@ public class LoginController {
            || StringUtils.isBlank(password)){
             throw GlobalException.from(ResultCode.LOGIN_ERROR);
         }
-
-        if(userService.findUser(username) == null){
+        User user = userService.findUser(username);
+        System.out.println(user);
+        if(user == null){
             throw GlobalException.from(ResultCode.LOGIN_ERROR);
         }
 
-        return ResultVo.ok();
+        return new ResultVo(ResultCode.LOGIN_SUCCESS);
     }
 
+    @PostMapping(value = "/login2")
+    @ResponseBody
+    @ApiOperation("登入检查")
+    public ResultVo loginCheck2(@RequestBody LoginForm loginForm){
+        String username =  loginForm.getUsername().trim();
+        String password =  loginForm.getPassword().trim();
+
+        //非空验证
+        if(StringUtils.isBlank(username)
+                || StringUtils.isBlank(password)){
+            throw GlobalException.from(ResultCode.LOGIN_ERROR);
+        }
+        User user = userService.findUser(username);
+        if(user == null){
+            throw GlobalException.from(ResultCode.LOGIN_ERROR);
+        }
+        //密码验证
+
+        //生成token
+        JwtInfo jwtInfo= new JwtInfo();
+        jwtInfo.setId(user.getId());
+        jwtInfo.setUsername(user.getUsername());
+        jwtInfo.setAvatar(user.getAvatar());
+        String token = JwtUtils.genToken(jwtInfo);
+
+        return new ResultVo(ResultCode.LOGIN_SUCCESS).data("token",token);
+    }
 
 
 

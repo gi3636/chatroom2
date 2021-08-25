@@ -14,6 +14,7 @@ public interface UserService {
     void addUser(User user);
     User findUser(Integer id);
     User findUser(String username);
+    User test();
 
 
 

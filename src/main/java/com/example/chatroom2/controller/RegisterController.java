@@ -63,7 +63,7 @@ public class RegisterController {
         user.setUsername(username);
         user.setPassword(password);
         userService.addUser(user);
-        return ResultVo.ok();
+        return new ResultVo(ResultCode.REGISTER_SUCCESS);
     }
 
 }

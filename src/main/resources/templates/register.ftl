@@ -79,21 +79,15 @@
       url: "/register",
       data: JSON.stringify(data),
       success: function (result) {
-        if (result != null) {
-          console.log(JSON.stringify(result));
-          if (result === true) {
-            window.location.href = "/login";
-            alert("注册成功");
-          } else {
-            alert("注册失败");
-            $(".result").css("display", "block");
-          }
-
+        if (result != null)
+          alert(result["msg"]);
+        if (result["code"] === 20019) {
+          window.location.href = "/login";
         }
       },
-      error: function () {
-        alert("异常");
-        window.location.href = "/register";
+      error: function (result) {
+        alert(result["msg"]);
+        //window.location.href = "/register";
       }
     })
   }
