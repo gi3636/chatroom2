@@ -14,6 +14,8 @@ public interface UserService {
     void addUser(User user);
     User findUser(Integer id);
     User findUser(String username);
+    void updateUser(User user);
+    void deleteUser(User user);
     User test();
 
 

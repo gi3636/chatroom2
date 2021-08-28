@@ -35,7 +35,9 @@ public enum ResultCode implements IResultCode {
 
     REGISTER_SUCCESS(20019, "注册成功"),
 
-    PARAMS_ERROR(20020, "参数校验失败");
+    PARAMS_ERROR(20020, "参数校验失败"),
+
+    AUTH_FAIL(20021, "授权失败");
 
 
     private Integer code;

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 
 
 @EntityListeners(AuditingEntityListener.class)//更新实体类的时间
@@ -51,6 +51,12 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_time")
     private Date updateTime;
+
+
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "tbl_user_group_chat",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_chat_id"))
+    private List<GroupChat> groupChatList;
 
 
 }

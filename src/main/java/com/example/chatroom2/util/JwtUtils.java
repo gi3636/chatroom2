@@ -80,13 +80,15 @@ public class JwtUtils {
      * @param request
      * @return
      */
-    public static String getIdByJwtToken(HttpServletRequest request) {
+    public static Integer getIdByJwtToken(HttpServletRequest request) {
         String jwtToken = request.getHeader("token");
-        if (StringUtils.isBlank(jwtToken)) return "";
+        if (StringUtils.isBlank(jwtToken)) return null;
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKey()).parseClaimsJws(jwtToken);
         Claims claims = claimsJws.getBody();
-        return (String) claims.get("id");
+        return (Integer) claims.get("id");
     }
+
+
 
 
 
