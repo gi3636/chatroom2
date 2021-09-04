@@ -3,8 +3,10 @@ package com.example.chatroom2.controller;
 import com.example.chatroom2.common.GlobalException.GlobalException;
 import com.example.chatroom2.common.ResultCode.ResultCode;
 import com.example.chatroom2.common.ResultVo;
+import com.example.chatroom2.entity.GroupChat;
 import com.example.chatroom2.entity.User;
 import com.example.chatroom2.model.form.RegisterForm;
+import com.example.chatroom2.service.GroupChatService;
 import com.example.chatroom2.service.UserService;
 import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +25,9 @@ public class RegisterController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    GroupChatService groupChatService;
 
     //跳转页面
     @GetMapping("/register")
@@ -62,6 +67,17 @@ public class RegisterController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+
+        GroupChat groupChat = groupChatService.findGroupChat(1);
+        if (groupChat != null){
+            user.getGroupChatList().add(groupChat);
+        }else{
+            groupChat = new GroupChat();
+            groupChat.setGroupName("第一个群");
+            groupChat.setDescription("这是公共群好好珍惜");
+            groupChat.setManager(user);
+            user.getGroupChatList().add(groupChat);
+        }
         userService.addUser(user);
         return new ResultVo(ResultCode.REGISTER_SUCCESS);
     }

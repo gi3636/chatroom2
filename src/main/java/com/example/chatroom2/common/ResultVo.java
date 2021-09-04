@@ -1,6 +1,7 @@
 package com.example.chatroom2.common;
 
 import com.example.chatroom2.common.ResultCode.IResultCode;
+import com.example.chatroom2.common.ResultCode.ResultCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -33,15 +34,15 @@ public class ResultVo {
 
     public static ResultVo ok(){
         ResultVo resultVo = new ResultVo();
-        resultVo.setCode(200);
-        resultVo.setMsg("操作成功");
+        resultVo.setCode(ResultCode.SUCCESS.getCode());
+        resultVo.setMsg(ResultCode.SUCCESS.getMsg());
         return resultVo;
     }
 
     public static ResultVo error(){
         ResultVo resultVo = new ResultVo();
-        resultVo.setCode(201);
-        resultVo.setMsg("操作失败");
+        resultVo.setCode(ResultCode.ERROR.getCode());
+        resultVo.setMsg(ResultCode.ERROR.getMsg());
         return resultVo;
     }
 

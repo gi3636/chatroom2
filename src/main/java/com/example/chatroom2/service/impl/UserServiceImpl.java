@@ -2,6 +2,7 @@ package com.example.chatroom2.service.impl;
 
 import com.example.chatroom2.dao.UserDao;
 import com.example.chatroom2.entity.User;
+import com.example.chatroom2.model.vo.UserVo;
 import com.example.chatroom2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -43,6 +44,11 @@ public class UserServiceImpl implements UserService {
         userDao.delete(user);
     }
 
+    @Override
+    public User findUserInfo(Integer id) {
+       return userDao.findUserInfo(id);
+    }
+
 
     /**
      * @param
@@ -55,4 +61,5 @@ public class UserServiceImpl implements UserService {
     public User test() {
         return userDao.findUserById(1);
     }
+
 }

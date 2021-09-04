@@ -50,7 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("存储："+SessionContext.USER_ID_KEY);
         request.setAttribute(SessionContext.USER_ID_KEY,id);
         System.out.println("预处理成功");
-        System.out.println("id"+id);
+        System.out.println("id :"+id);
 
 
         return true;

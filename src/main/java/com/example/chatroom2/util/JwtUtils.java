@@ -15,7 +15,7 @@ import java.util.Date;
  * @create: 8/24/2021 10:22 AM
  */
 public class JwtUtils {
-    private final static long EXPIRE = 1000 * 60 * 60 ;
+    private final static long EXPIRE = 1000 * 60 * 60 * 24 ;
     public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
 
 

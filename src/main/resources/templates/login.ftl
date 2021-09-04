@@ -11,6 +11,7 @@
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
 
 
 </head>
@@ -43,7 +44,7 @@
                     </div>
                     <button type="button" id="login_btn" onclick="login()" class="btn btn-success col-sm-12">登入</button>
                 </form>
-                <div class="forget-password border-bottom-0 border-dark"><a href="#" onclick="test()">忘记密码？</a></div>
+                <div class="forget-password border-bottom-0 border-dark"><a href="#" onclick="getUserInfo(1)">忘记密码？</a></div>
                 <div class="register"><a href="/register">创建用户 </a><i class="fa fa-arrow-right"></i></div>
                 <div class="result">验证失败！</div>
             </div>
@@ -69,6 +70,11 @@
       url: "/login",
       data:JSON.stringify(data),
       success: function (result) {
+        //判断token
+        if (result["code"] === 20021) {
+          alert("请重新登入，登入已超时");
+          window.location.href = "/login";
+        }
         if (result != null)
           alert(result["msg"]);
         if (result["code"] === 20018) {
@@ -78,7 +84,7 @@
         }
       },
       error: function (result) {
-        if(result.code == 20021){
+        if(result["code"] === 20021){
           alert("请重新登入");
           window.location.href ="/login";
         }else{

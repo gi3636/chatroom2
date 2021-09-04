@@ -23,9 +23,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/fontawesome-free-5.11.2-web/css/all.css">
     <link rel="stylesheet" href="css/chatroom.css">
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src='/js/chatroom.js'></script>
     <script src='/js/file.js'></script>
     <script src='/js/common.js'></script>
+    <script src='/js/api.js'></script>
 
 </head>
 

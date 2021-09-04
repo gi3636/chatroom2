@@ -1,4 +1,4 @@
-package com.example.chatroom2.config;
+package com.example.chatroom2.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis工具类
- *
+ * <p>
  * 来源：https://blog.csdn.net/u010957645/article/details/89340983
  */
 
@@ -105,6 +105,7 @@ public class RedisUtils {
     public boolean set(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, value);
+            redisTemplate.expire(key, 60*60*24, TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

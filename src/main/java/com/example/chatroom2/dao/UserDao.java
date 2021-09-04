@@ -3,7 +3,9 @@ package com.example.chatroom2.dao;
 
 
 import com.example.chatroom2.entity.User;
+import com.example.chatroom2.model.vo.UserVo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -20,6 +22,9 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     User findUserByUsername(String username);
 
+
+    @Query("select new User(u.id,u.username,u.avatar) from User u where u.id=?1")
+    User findUserInfo(Integer userId);
 
 
 

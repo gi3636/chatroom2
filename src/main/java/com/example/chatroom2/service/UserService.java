@@ -1,6 +1,7 @@
 package com.example.chatroom2.service;
 
 import com.example.chatroom2.entity.User;
+import com.example.chatroom2.model.vo.UserVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +17,8 @@ public interface UserService {
     User findUser(String username);
     void updateUser(User user);
     void deleteUser(User user);
+
+    User findUserInfo(Integer id);
     User test();
 
 

@@ -13,5 +13,5 @@ public interface GroupChatService {
 
     void addGroupChat(GroupChat groupChat);
     GroupChat findGroupChat(Integer id);
-    void findGroupChat(String groupName);
+    GroupChat findGroupChat(String groupName);
 }

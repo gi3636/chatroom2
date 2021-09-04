@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.chatroom2.common.GlobalException.GlobalException;
 import com.example.chatroom2.common.ResultCode.ResultCode;
 import com.example.chatroom2.common.ResultVo;
-import com.example.chatroom2.config.RedisKeyEnum;
-import com.example.chatroom2.config.RedisUtils;
+import com.example.chatroom2.util.RedisKeyEnum;
+import com.example.chatroom2.util.RedisUtils;
 import com.example.chatroom2.entity.User;
 import com.example.chatroom2.model.form.LoginForm;
 import com.example.chatroom2.service.UserService;
@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.xml.transform.Result;
 
 /**
  * @description:
@@ -81,7 +79,7 @@ public class LoginController {
         jwtInfo.setAvatar(user.getAvatar());
         String token = JwtUtils.genToken(jwtInfo);
         //redisTemplate.opsForValue().set("login::"+username,token);
-        redisUtils.set(RedisKeyEnum.OAUTH_APP_TOKEN.keyBuilder(String.valueOf(jwtInfo.getId())), JSONObject.toJSONString(jwtInfo), 3000);
+        redisUtils.set(RedisKeyEnum.OAUTH_APP_TOKEN.keyBuilder(String.valueOf(jwtInfo.getId())), JSONObject.toJSONString(jwtInfo), 60*60*24);
         return new ResultVo(ResultCode.LOGIN_SUCCESS).data("token",token);
     }
 

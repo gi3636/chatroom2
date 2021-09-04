@@ -23,11 +23,11 @@ public class GroupChatImpl implements GroupChatService {
 
     @Override
     public GroupChat findGroupChat(Integer id) {
-       return null;
+       return groupChatDao.findGroupChatById(id);
     }
 
     @Override
-    public void findGroupChat(String groupName) {
-
+    public GroupChat findGroupChat(String groupName) {
+        return groupChatDao.findGroupChatByGroupName(groupName);
     }
 }

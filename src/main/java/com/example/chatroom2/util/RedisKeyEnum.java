@@ -1,4 +1,4 @@
-package com.example.chatroom2.config;
+package com.example.chatroom2.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

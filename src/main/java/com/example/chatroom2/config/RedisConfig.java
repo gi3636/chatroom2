@@ -42,7 +42,7 @@ public class RedisConfig {
     public CacheManager cacheManager(LettuceConnectionFactory connectionFactory) {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
                 //过期时间
-                .entryTtl(Duration.ofSeconds(600))
+                .entryTtl(Duration.ofSeconds(60 * 60 * 24))
                 //配置序列化
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))

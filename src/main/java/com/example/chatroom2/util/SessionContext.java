@@ -3,8 +3,6 @@ package com.example.chatroom2.util;
 import com.alibaba.fastjson.JSONObject;
 import com.example.chatroom2.common.GlobalException.GlobalException;
 import com.example.chatroom2.common.ResultCode.ResultCode;
-import com.example.chatroom2.config.RedisKeyEnum;
-import com.example.chatroom2.config.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +23,7 @@ public class SessionContext {
 
     public final static String USER_ID_KEY = "uid";
 
-    public JwtInfo getInfo(){
+    public JwtInfo getJwtInfo(){
         String id = getUserId();
         Object obj = redisUtils.get(RedisKeyEnum.OAUTH_APP_TOKEN.keyBuilder(id));
         if (obj == null){
@@ -39,8 +37,6 @@ public class SessionContext {
     }
 
     public String getUserId(){
-        System.out.println("getUserID:"+USER_ID_KEY);
-        System.out.println(RequestAttributes.SCOPE_REQUEST);
         String id = RequestContextHolder.getRequestAttributes().getAttribute(USER_ID_KEY, RequestAttributes.SCOPE_REQUEST).toString();
         if(null == id){
             log.error("=== 请重新登入 ===");

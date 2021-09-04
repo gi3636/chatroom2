@@ -12,5 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GroupChatDao extends JpaRepository<GroupChat,Integer> {
 
+    GroupChat findGroupChatById(Integer id);
 
+    GroupChat findGroupChatByGroupName(String groupName);
 }
