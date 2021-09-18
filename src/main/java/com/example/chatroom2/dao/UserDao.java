@@ -5,8 +5,12 @@ package com.example.chatroom2.dao;
 import com.example.chatroom2.entity.User;
 import com.example.chatroom2.model.vo.UserVo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
+import java.beans.Transient;
 
 
 //CrudRepository：提供标准的创建，读取，更新和删除功能，
@@ -25,6 +29,14 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     @Query("select new User(u.id,u.username,u.avatar) from User u where u.id=?1")
     User findUserInfo(Integer userId);
+
+
+    @Transactional
+    @Modifying
+    @Query("update User set avatar=?1 where id=?2")
+    void changeAvatar(String path,Integer userId);
+
+
 
 
 

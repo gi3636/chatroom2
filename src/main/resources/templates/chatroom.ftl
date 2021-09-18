@@ -41,11 +41,11 @@
                     <div class="row">
                         <div class="avatar">
                             <a class="change-avatar" data-toggle="modal" data-target="#change_img_modal" href="#" onclick="showItem()">
-<#--                                <#if Session["username"]?exists>-->
-<#--                                    <img src="/show/${Session["username"]}" width="100%" height="100%">-->
-<#--                                <#else>-->
+                                <#if Session["username"]?exists>
+                                    <img src="/show/${Session["username"]}" width="100%" height="100%">
+                                <#else>
                                     <img src="" width="100%" height="100%">
-<#--                                </#if>-->
+                                </#if>
                             </a>
                         </div>
                     </div>
@@ -234,11 +234,11 @@
 <#--                            <#else>-->
 <#--                           <img src="/show" style="width: 100px"/>-->
 <#--                            </#if>-->
-<#--                            <#if Session["username"]?exists>-->
-<#--                                <img class="changed-image" src="/show/${Session["username"]}" alt="" width="100%" height="100%" style="padding-bottom: 20px; ">-->
-<#--                            <#else>-->
+                            <#if Session["username"]?exists>
+                                <img class="changed-image" src="/show/${Session["username"]}" alt="" width="100%" height="100%" style="padding-bottom: 20px; ">
+                            <#else>
                                 <img class="changed-image" src="" alt="" width="100%" height="100%" style="padding-bottom: 20px; ">
-<#--                            </#if>-->
+                            </#if>
 
                         </div>
                     </div>

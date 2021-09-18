@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @description:
  * @author: fenggi123
@@ -56,7 +58,7 @@ public class LoginController {
     @PostMapping(value = "/login")
     @ResponseBody
     @ApiOperation("登入检查")
-    public ResultVo loginCheck(@RequestBody LoginForm loginForm){
+    public ResultVo loginCheck(@RequestBody LoginForm loginForm, HttpSession httpSession){
         System.out.println(loginForm);
         String username =  loginForm.getUsername().trim();
         String password =  loginForm.getPassword().trim();
@@ -78,6 +80,7 @@ public class LoginController {
         jwtInfo.setUsername(user.getUsername());
         jwtInfo.setAvatar(user.getAvatar());
         String token = JwtUtils.genToken(jwtInfo);
+        httpSession.setAttribute("username", user.getUsername());
         //redisTemplate.opsForValue().set("login::"+username,token);
         redisUtils.set(RedisKeyEnum.OAUTH_APP_TOKEN.keyBuilder(String.valueOf(jwtInfo.getId())), JSONObject.toJSONString(jwtInfo), 60*60*24);
         return new ResultVo(ResultCode.LOGIN_SUCCESS).data("token",token);

@@ -62,6 +62,7 @@ public class ChatroomController {
      * @return
      */
     @GetMapping("/history/{groupId}")
+    @ResponseBody
     public ResultVo getGroupChatHistory(@PathVariable Integer groupId){
         List<Message> messageList = messageService.findAllMessageByGroupId(groupId);
         return ResultVo.ok().data("messageList",messageList);
@@ -73,6 +74,7 @@ public class ChatroomController {
      * @return
      */
     @GetMapping("/history/user")
+    @ResponseBody
     public ResultVo getAllChatHistory( HttpServletRequest request){
         Integer userId = JwtUtils.getIdByJwtToken(request);
         List<Message> messageList = messageService.findAllMessageByUserId(userId);

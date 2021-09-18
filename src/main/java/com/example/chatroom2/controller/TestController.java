@@ -105,37 +105,46 @@ public class TestController {
         friend2.setUser(user1);
         friend2.setFriend(user4);
 
-        if(user1.getFriendList() == null){
+        if (user1.getFriendList() == null) {
             //没有朋友
             Set<Friend> friends = new HashSet<>();
             friends.add(friend);
             friends.add(friend1);
             friends.add(friend2);
             user1.setFriendList(friends);
-        }else {
+        } else {
             user1.getFriendList().add(friend);
         }
 
         userService.updateUser(user1);
 
 
-
         return ResultVo.ok();
     }
 
     @GetMapping("/4")
-     public ResultVo getFriend(){
+    public ResultVo getFriend() {
         User user = userService.findUser("fenggi");
         Set<Friend> list = user.getFriendList();
-        for (Friend friend : list){
-            System.out.println( friend);
+        for (Friend friend : list) {
+            System.out.println(friend);
         }
         return null;
     }
 
     @GetMapping("/5")
-    public ResultVo test5(){
+    public ResultVo test5() {
         User user = userService.findUserInfo(1);
-        return ResultVo.ok().data("userVo",user);
+        return ResultVo.ok().data("userVo", user);
     }
+
+    @GetMapping("/6")
+    public ResultVo test6() {
+        Integer temp = 3;
+        temp = temp / 2;
+        System.out.println(temp);
+        return ResultVo.ok();
+    }
+
+    
 }

@@ -62,6 +62,7 @@ function getUserInfo(userId) {
  * 获取用户所有聊天信息
  */
 function getAllChatHistory() {
+  let data = null;
   $.ajax({
     headers:{
       token:$.cookie("token")
@@ -72,10 +73,12 @@ function getAllChatHistory() {
     content:"application/json;charset=utf-8",
     success:(result)=>{
       console.log("获取用户所有聊天信息："+ JSON.stringify(result));
+      data = result;
     },
     error:(result)=>{
       console.log("获取用户聊天信息失败："+JSON.stringify(result));
     }
   })
+  return data;
 
 }

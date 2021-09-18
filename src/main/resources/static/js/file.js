@@ -31,6 +31,9 @@ function showItem() {
 function uploadImg(){
     var formData=new FormData($(".img-form")[0])
     $.ajax({
+        headers:{
+            token:$.cookie("token")
+        },
         type:"POST",
         // dataType:"json",//服务器返回数据类型,不写就自动选择
         /**

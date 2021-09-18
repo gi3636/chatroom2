@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
        return userDao.findUserInfo(id);
     }
 
+    @Override
+    public void changeAvatar(String path, Integer userId) {
+        userDao.changeAvatar(path,userId);
+    }
+
 
     /**
      * @param

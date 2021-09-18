@@ -19,6 +19,8 @@ public interface UserService {
     void deleteUser(User user);
 
     User findUserInfo(Integer id);
+
+    void changeAvatar(String path,Integer userId);
     User test();
 
 

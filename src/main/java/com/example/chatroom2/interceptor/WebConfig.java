@@ -3,6 +3,7 @@ package com.example.chatroom2.interceptor;
 import javafx.application.Application;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,8 @@ import org.springframework.web.util.pattern.PathPatternParser;
 @Configuration
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
+    @Value("${web.upload-path}")
+    private String path;
 
     private ApplicationContext applicationContext;
 
@@ -64,6 +67,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
                 .excludePathPatterns("/error")
                 .excludePathPatterns("/test/**")
                 .excludePathPatterns("/webjars/**")
+                .excludePathPatterns("/show/**")
                 .excludePathPatterns("/css/**", "/js/**", "/img/**", "/fontawesome-free-5.11.2-web/**","/favicon.ico");
 
 
@@ -74,6 +78,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 //        WebMvcConfigurer.super.addResourceHandlers(registry);
         //将所有/static/** 访问都映射到classpath:/static/ 目录下
         //addResourceLocations的每一个值必须以'/'结尾,否则虽然映射了,但是依然无法访问该目录下的的文件(支持: classpath:/xxx/xx/, file:/xxx/xx/, http://xxx/xx/)
-        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+      registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+//        registry.addResourceHandler("/img/**").addResourceLocations("file:/"+path);
     }
 }

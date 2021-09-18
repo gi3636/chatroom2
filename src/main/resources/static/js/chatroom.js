@@ -14,9 +14,10 @@ $(function () {
    * @param e
    */
   ws.onopen = function (e) {
-    let res = JSON.parse(e.data);
+    let res = JSON.stringify(e.data);
     console.log(res);
-
+    let data = getAllChatHistory();
+    console.log("成功获取全部聊天记录："+JSON.stringify(data));
     //初始化信息
   }
 
@@ -29,10 +30,6 @@ $(function () {
     console.log(res);
     //处理信息
     handleMessage(res);
-
-    //判断信息
-    //是否显示
-
   }
 
 
@@ -78,7 +75,7 @@ $(function () {
         "        <div class=\"row username w-100 justify-content-end\">" + user["username"] + "</div>\n" +
         "        <div class=\"row content \">" + data + "</div>\n" +
         "     </div>\n" +
-        "     <img src=" + user["avatar"] + " width=\"50px\" height=\"50px\">\n" +
+        "     <img src=\"/show/" + user["username"] + "\" width=\"50px\" height=\"50px\">\n" +
         "  </li>";
     $(".chat").append(str);
 
@@ -124,7 +121,7 @@ $(function () {
     console.log("显示文字信息：" + message);
     let str = "<li class=\"row\" id=\"time_message\"><p class=\"d-flex w-100 justify-content-center\">" + time + "</p></li>" +
         "<li class=\"row\" id=\"received_message\">\n" +
-        "   <img src=\"" + fromUser["avatar"] + "\" width=\"50px\" height=\"50px\">\n" +
+        "   <img src=\"show/"+fromUser["username"]+"\" width=\"50px\" height=\"50px\">\n" +
         "    <div class=\"row col-sm-11\">\n" +
         "       <div class=\"row username col-sm-12\">" + fromUser["username"] + "</div>\n" +
         "              <div class=\"row content\">" + message["content"] + "</div>\n" +
