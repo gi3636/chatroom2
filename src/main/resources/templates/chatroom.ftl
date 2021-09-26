@@ -261,7 +261,21 @@
 
 <script>
 
-
+    function showChatDetail() {
+        let isTrue = parseInt($('#click_side').attr('value'));
+        $(function() {
+            if (isTrue === 0) {
+                $('.chat-detail').css("width", "18%");
+                $('.user-detail>li').css("width", "80px");
+                $('#click_side').attr('value', 1);
+            } else {
+                $('.user-detail>li').css("width", "0px");
+                $('.chat-detail').css("width", "0%");
+                $('#click_side').attr('value', 0);
+            }
+            return false;
+        });
+    }
 </script>
 
 </html>

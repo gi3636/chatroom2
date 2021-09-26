@@ -18,7 +18,16 @@ $(function () {
     console.log(res);
     let data = getAllChatHistory();
     console.log("成功获取全部聊天记录："+JSON.stringify(data));
+    showUserList(1);
     //初始化信息
+  }
+  function showUserList(groupId){
+    let str = "";
+    let groupUserList = getGroupUserList(groupId);
+    for (let user of groupUserList){
+      str += "<li onclick='initPrivateChat("+user["userId"]+")'><img src=\""+user["avatar"]+" \" height=\"80%\" width=\"80%\"> <p>"+user["username"]+"</p></li>";
+    }
+    $(".user-detail").html(str);
   }
 
   /**
@@ -32,13 +41,11 @@ $(function () {
     handleMessage(res);
   }
 
-
   /**
    * 结束服务时触发
    * @param e
    */
   ws.onclose = function (e) {
-
   }
 
   /**
@@ -85,8 +92,6 @@ $(function () {
     ws.send(JSON.stringify(mess));
     scrollDown();
   }
-
-
 
   /**
    * 处理接收信息
@@ -241,6 +246,23 @@ $(function () {
     }
   }
 
+
+
+  function showChatDetail() {
+    let isTrue = parseInt($('#click_side').attr('value'));
+    $(function() {
+      if (isTrue === 0) {
+        $('.chat-detail').css("width", "18%");
+        $('.user-detail>li').css("width", "80px");
+        $('#click_side').attr('value', 1);
+      } else {
+        $('.user-detail>li').css("width", "0px");
+        $('.chat-detail').css("width", "0%");
+        $('#click_side').attr('value', 0);
+      }
+      return false;
+    });
+  }
 
 
 

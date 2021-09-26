@@ -78,7 +78,31 @@ function getAllChatHistory() {
     error:(result)=>{
       console.log("获取用户聊天信息失败："+JSON.stringify(result));
     }
-  })
+  });
   return data;
+}
 
+/**
+ * 获取群的用户
+ */
+function getGroupUserList(groupId){
+  let data = null;
+  $.ajax({
+    headers:{
+      token:$.cookie("token")
+    },
+    method:"GET",
+    url:"/getGroupUserList/"+groupId,
+    type:"json",
+    content:"application/json;charset=utf-8",
+    async:false,
+    success:(result)=>{
+      console.log("获取群用户："+ JSON.stringify(result));
+      data = result.data["userList"];
+    },
+    error:(result)=>{
+      console.log("获取群用户失败："+JSON.stringify(result));
+    }
+  });
+  return data;
 }

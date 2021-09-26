@@ -24,9 +24,6 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    @Autowired
-    private UserInterceptor userInterceptor;
-
     public WebConfig(){
         super();
     }

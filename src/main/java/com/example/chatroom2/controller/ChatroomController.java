@@ -1,7 +1,9 @@
 package com.example.chatroom2.controller;
 
 import com.example.chatroom2.common.ResultVo;
+import com.example.chatroom2.entity.GroupChat;
 import com.example.chatroom2.entity.Message;
+import com.example.chatroom2.entity.User;
 import com.example.chatroom2.service.GroupChatService;
 import com.example.chatroom2.service.MessageService;
 import com.example.chatroom2.service.UserService;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.transform.Result;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @description:
@@ -80,6 +83,16 @@ public class ChatroomController {
         List<Message> messageList = messageService.findAllMessageByUserId(userId);
         return ResultVo.ok().data("messageList",messageList);
     }
+
+    @GetMapping("/getGroupUserList/{groupId}")
+    @ResponseBody
+    public ResultVo getGroupUserList(@PathVariable Integer groupId){
+        GroupChat groupChat = groupChatService.findGroupChat(groupId);
+        Set<User> userList = groupChat.getUsers();
+        return ResultVo.ok().data("userList",userList);
+    }
+
+
 
 
 

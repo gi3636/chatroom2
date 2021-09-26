@@ -34,6 +34,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("token : "+token);
         String requestURI = request.getRequestURI().replaceAll("/+","/");
         log.info("requestURI: {}",requestURI);
+        int interval = request.getSession().getMaxInactiveInterval();
+        System.out.println("session过期时间(s):" + interval);
 
         //验证token
         if (StringUtils.isBlank(token)){
