@@ -156,7 +156,7 @@
                                 <i class="fas fa-image"></i>
                                 <i class="far fa-file"></i>
                             </div>
-                            <textarea class="input" name="" id="textarea" cols="20" rows="1" placeholder="写点东西吧..."></textarea>
+                            <textarea class="input" id="textarea" cols="20" rows="1" placeholder="写点东西吧..."></textarea>
                         </div>
                     </div>
                 </div>

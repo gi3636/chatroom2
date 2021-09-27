@@ -18,7 +18,6 @@ function init() {
         window.location.href = "/login";
       }
       user = result.data.user;
-      console.log("user" + JSON.stringify(user));
     },
     error: (result) => {
       if (result["code"] === 20021) {
@@ -47,12 +46,10 @@ function getUserInfo(userId) {
     type: "json",
     content: "application/json;charset=utf-8",
     success: function(result){
-      console.log("查询用户资料：" + JSON.stringify(result));
       user = result.data["userVo"];
     },
     error: (result) => {
       console.log(("查询用户资料失败：" + JSON.stringify(result)));
-      return result;
     }
   });
   return user;

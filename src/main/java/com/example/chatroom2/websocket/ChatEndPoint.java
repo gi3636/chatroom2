@@ -47,18 +47,14 @@ public class ChatEndPoint {
     //通过session 对象，发送消息给指定的用户
     private HttpSession httpSession;
 
-
     //存储token信息
     private JwtInfo jwtInfo;
     public static UserService userService;
     public static GroupChatService groupChatService;
     public static FriendService friendService;
     public static MessageService messageService;
-
     public static SessionContext sessionContext;
     public static RedisUtils redisUtils;
-
-
 
     /**
      * 建立时调用
@@ -73,41 +69,22 @@ public class ChatEndPoint {
         Object obj =  redisUtils.get(RedisKeyEnum.OAUTH_APP_TOKEN.keyBuilder(String.valueOf(userId)));
         jwtInfo = JSONObject.parseObject(obj.toString(),JwtInfo.class);
         System.out.println(jwtInfo);
-
-
         //存放进去在线用户
         onlineUsers.put(userId,this);
         for (Map.Entry<Integer,ChatEndPoint> entry : onlineUsers.entrySet()){
             System.out.println("key ="+entry.getKey());
             System.out.println("value ="+entry.getValue());
         }
-
         //发送信息
         Message message = new Message();
         message.setChatType(MessageType.CHAT_GROUP);
         message.setContent(jwtInfo.getUsername()+"已上线");
         message.setFromUser(jwtInfo.getId());
         message.setMsgType(MessageType.MSG_NOTICE);
-        message.setSendTo(1);
         message.setGroupId(1);
         message.setCreateTime(new Date());
         sendGroupMessage(message);
-        message.setMsgType(MessageType.MSG_TEXT);
-        sendGroupMessage(message);
-        saveMessage(message);
-//        List<Message> messageList = groupChat.getMessageList();
-//        for (Message message1 : messageList){
-//            System.out.println(message1);
-//        }
-        List<Message> messageList = messageService.findAllMessageByGroupId(1);
-        for (Message message1 : messageList){
-            System.out.println(message1);
-        }
-
     }
-
-
-
 
     /**
      * 接受信息时调用
@@ -135,33 +112,47 @@ public class ChatEndPoint {
      */
     @OnClose
     public void onClose(Session session){
-
+        onlineUsers.remove(this);
     }
 
+    /**
+     * 保存信息
+     * @param message
+     */
     public void saveMessage(Message message){
         messageService.addMessage(message);
     }
 
+    /**
+     * 发送私聊信息
+     * @param message
+     */
     public void sendSingleMessage(Message message){
         sendMessage(message);
     }
 
+    /**
+     * 发送群信息
+     * @param message
+     */
     public void sendGroupMessage(Message message){
         GroupChat groupChat = groupChatService.findGroupChat(message.getGroupId());
         System.out.println("groupChat 查询："+groupChat);
         Set<User> users = groupChat.getUsers();
         for (User user : users){
-//            if(user.getId() == jwtInfo.getId()){
-//                continue;
-//            }
-            System.out.println(user.getId());
+            if(user.getId() == jwtInfo.getId()){
+                continue;
+            }
             //发送信息
             message.setSendTo(user.getId());
             sendMessage(message);
         }
     }
 
-
+    /**
+     * 发送信息
+     * @param message
+     */
     public void sendMessage(Message message){
         String msg = JSON.toJSONString(message);
         System.out.println("发送消息："+msg);
@@ -170,11 +161,7 @@ public class ChatEndPoint {
             ChatEndPoint chatEndPoint = onlineUsers.get(message.getSendTo());
             chatEndPoint.session.getAsyncRemote().sendText(msg);
         }
+        saveMessage(message);
     }
-
-
-
-
-
 }
 
